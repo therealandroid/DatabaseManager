@@ -1,0 +1,1 @@
+include ':app', ':tablegenerator', ':querybuilder-android-support'
