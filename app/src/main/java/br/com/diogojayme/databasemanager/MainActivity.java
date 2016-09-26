@@ -12,24 +12,23 @@ import br.com.diogojayme.databasemanager.table.Course;
 import br.com.diogojayme.databasemanager.table.University;
 import br.com.diogojayme.databasemanager.table.User;
 import br.com.diogojayme.databasemanager.table.services.UserServiceImpl;
-import querybuilder.configurations.Configuration;
-import querybuilder.configurations.Database;
 
 
 /**
  * Created by diogojayme on 9/13/16.
  */
 public class MainActivity extends AppCompatActivity {
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Configuration.setDatabase(Database.SQLITE);
         testInsertUser();
     }
 
     private boolean testInsertUser(){
         User user = new User();
-        user.setId(2);
+        user.setId(3);
         user.setFirstName("Diogo");
         user.setLastName("Jayme");
         user.setCourseId(2);

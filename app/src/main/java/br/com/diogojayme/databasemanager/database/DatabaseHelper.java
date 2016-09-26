@@ -17,7 +17,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        for (String sql: SchemeConfiguration.DROP_SQL){
+        for (String sql:  SchemeConfiguration.DROP_SQL){
             db.execSQL(sql);
         }
     }
