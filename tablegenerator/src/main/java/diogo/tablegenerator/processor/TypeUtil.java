@@ -1,6 +1,7 @@
 package diogo.tablegenerator.processor;
 
 
+import querybuilder.query.creation.ColumnType;
 
 /**
  * Created by diogojayme on 8/5/16.

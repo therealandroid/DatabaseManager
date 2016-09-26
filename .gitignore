@@ -6,3 +6,12 @@
 .DS_Store
 /build
 /captures
+/.idea
+.idea/vcs.xml
+app/libs/
+app/src/main/res/drawable/
+java_pid20968.hprof
+java_pid22173.hprof
+querybuilder-android-support/libs/
+querybuilder-android-support/src/main/res/drawable/
+tablegenerator/src/main/res/drawable/

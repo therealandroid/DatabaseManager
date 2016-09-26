@@ -8,14 +8,14 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import br.com.augustoccesar.querybuilder.builders.TableBuilder;
-import br.com.augustoccesar.querybuilder.configurations.Configuration;
-import br.com.augustoccesar.querybuilder.configurations.Database;
-import br.com.augustoccesar.querybuilder.query.creation.CreateColumn;
 import diogo.tablegenerator.annotations.Column;
 import diogo.tablegenerator.annotations.ForeignKey;
 import diogo.tablegenerator.annotations.PrimaryKey;
 import diogo.tablegenerator.annotations.Table;
+import querybuilder.builders.TableBuilder;
+import querybuilder.configurations.Configuration;
+import querybuilder.configurations.Database;
+import querybuilder.query.creation.CreateColumn;
 
 
 /**
@@ -51,7 +51,7 @@ public class TableGenerator {
                 );
             }else if(columnMetadata.isForeignKey()){
                 builder.foreignKeys(
-                        new br.com.augustoccesar.querybuilder.query.creation.ForeignKey().column(columnMetadata.getColumnName())
+                        new querybuilder.query.creation.ForeignKey().column(columnMetadata.getColumnName())
                                 .references(columnMetadata.getReferencesTable(), columnMetadata.getForeignKeyId())
                 );
 

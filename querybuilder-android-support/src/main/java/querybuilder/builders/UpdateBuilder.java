@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import br.com.augustoccesar.querybuilder.helpers.ColumnHelper;
-import br.com.augustoccesar.querybuilder.interfaces.QueryBuilder;
-import br.com.augustoccesar.querybuilder.query.Comparisons;
-import br.com.augustoccesar.querybuilder.query.Condition;
-import br.com.augustoccesar.querybuilder.query.update.UpdateColumn;
+import querybuilder.helpers.ColumnHelper;
+import querybuilder.interfaces.QueryBuilder;
+import querybuilder.query.Comparisons;
+import querybuilder.query.Condition;
+import querybuilder.query.update.UpdateColumn;
 
 /**
  * Created by augustoccesar on 6/17/16.
