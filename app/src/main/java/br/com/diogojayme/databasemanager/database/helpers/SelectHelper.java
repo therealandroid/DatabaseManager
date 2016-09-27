@@ -5,16 +5,16 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Handler;
-import android.os.HandlerThread;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.diogojayme.databasemanager.database.Callback;
 import br.com.diogojayme.databasemanager.database.DatabaseHelper;
 import querybuilder.builders.SelectBuilder;
 import querybuilder.executors.mapper.QueryRelation;
 import querybuilder.executors.mapper.ResultSetExtractor;
+import rx.Observable;
 
 /**
  * Created by diogojayme on 9/14/16.
@@ -32,45 +32,42 @@ public class SelectHelper<T> {
         this.mainHandler = new Handler(context.getMainLooper());
     }
 
-    public SelectHelper query(SelectBuilder builder){
+    public SelectHelper<T> query(SelectBuilder builder){
         this.selectBuilder = builder;
         return this;
     }
 
     @SuppressWarnings("unchecked")
-    public SelectHelper from(Class clazz){
+    public SelectHelper<T> from(Class clazz){
         this.from = clazz;
         return this;
     }
 
-    public SelectHelper withRelation(QueryRelation queryRelation){
+    public SelectHelper<T> withRelation(QueryRelation queryRelation){
         this.queryRelation = queryRelation;
         return this;
     }
 
-    @SuppressWarnings("unchecked")
-    public void executeQueryAsync(final Callback callback) {
-        HandlerThread handlerThread = new HandlerThread("Background Thread");
-        handlerThread.start();
-        Handler handler = new Handler(handlerThread.getLooper());
-        handler.post(() -> {
-            try {
-                Cursor cursor = database.rawQuery(selectBuilder.build(), null);
-                List<T> list = new ArrayList<>();
+    public Observable<List<T>> executeQueryAsync() throws SQLException {
+        Observable<List<T>> observable;
+        Cursor cursor = database.rawQuery(selectBuilder.build(), null);
+        List<T> list = new ArrayList<>();
+        while(cursor.moveToNext()) {
+            ResultSetExtractor resultSet = new ResultSetExtractor(cursor);
+            T myObject = resultSet.extractClasses(queryRelation, from);
+            list.add(myObject);
+        }
 
-                while(cursor.moveToNext()) {
-                    ResultSetExtractor resultSet = new ResultSetExtractor(cursor);
-                    T myObject = resultSet.extractClasses(queryRelation, from);
-                    list.add(myObject);
-                }
+        observable = Observable.just(list);
+        closeDatabase(database);
+        closeCursor(cursor);
+        return observable;
+    }
 
-                onSuccess(callback, list);
-                closeCursor(cursor);
-            }catch (Exception e){
-                e.printStackTrace();
-                onError(callback);
-            }
-        });
+    private void closeDatabase(SQLiteDatabase database){
+        if(database != null && !database.isOpen()){
+            database.close();
+        }
     }
 
     private void closeCursor(Cursor cursor){
@@ -79,25 +76,4 @@ public class SelectHelper<T> {
         }
     }
 
-    @SuppressWarnings("unchecked")
-    private void onSuccess(final Callback callback,final List<T> objects){
-        if(database != null && database.isOpen()){
-            database.close();
-        }
-
-        if(mainHandler  != null) {
-            mainHandler.post(() -> callback.onQueryResults(objects));
-        }
-    }
-
-    @SuppressWarnings("unchecked")
-    private void onError(final Callback callback){
-        if(database != null && database.isOpen()){
-            database.close();
-        }
-
-        if(mainHandler  != null) {
-            mainHandler.post(callback::onEmptyResults);
-        }
-    }
 }
