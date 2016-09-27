@@ -3,8 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/DatabaseManager.iml" filepath="$PROJECT_DIR$/DatabaseManager.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />
       <module fileurl="file://$PROJECT_DIR$/querybuilder-android-support/querybuilder-android-support.iml" filepath="$PROJECT_DIR$/querybuilder-android-support/querybuilder-android-support.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sample/sample.iml" filepath="$PROJECT_DIR$/sample/sample.iml" />
       <module fileurl="file://$PROJECT_DIR$/tablegenerator/tablegenerator.iml" filepath="$PROJECT_DIR$/tablegenerator/tablegenerator.iml" />
     </modules>
   </component>

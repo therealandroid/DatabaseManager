@@ -1,1 +1,1 @@
-include ':app', ':tablegenerator', ':querybuilder-android-support'
+include ':sample', ':tablegenerator', ':querybuilder-android-support', ':library'
