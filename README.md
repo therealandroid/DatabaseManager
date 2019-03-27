@@ -1,6 +1,17 @@
 # SqliteModelMapper
 
-##Initialize in your Application
+An attempt to creating an abstraction to easily work with Relational Database in Android.
+
+Libraries:
+ `RxJava`
+ `Reflection` 
+ `QueryBuilder` -> By @augustoccesar
+
+
+### Usage
+
+#### Initialize in your Application
+
 ```Java
         Configuration.setDatabase(Database.SQLITE);
 
@@ -14,7 +25,7 @@
                 "DROP TABLE IF EXISTS "+ TableGenerator.getTableName(User.class),
         }, "sample.db", 1);
 ```
-##Usage
+### Usage
 
 ```Java
      QueryRelation universityAndCourse = new QueryRelation(new ClassTable("u", User.class))
@@ -53,3 +64,12 @@
             e.printStackTrace();
         }
 ```
+### DONE
+        Inserting queries
+        Selecting queries
+
+### TODO
+        Delete
+               
+
+
